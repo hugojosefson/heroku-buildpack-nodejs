@@ -57,6 +57,14 @@ head "Building dependencies"
 cd $build_dir
 build_dependencies
 
+####### Run any custom build script
+
+if [ $CUSTOM_BUILD_SCRIPT ]; then
+  head "Running custom build script"
+  cd $build_dir
+  run_custom_build_script
+fi
+
 ####### Create a Procfile if possible
 
 head "Checking startup method"

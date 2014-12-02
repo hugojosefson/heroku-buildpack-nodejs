@@ -82,7 +82,11 @@ read_current_state() {
 
   info "environment variables..."
   export_env_dir $env_dir
-  export NPM_CONFIG_PRODUCTION=${NPM_CONFIG_PRODUCTION:-true}
+  if [ $CUSTOM_BUILD_SCRIPT ]; then
+    export NPM_CONFIG_PRODUCTION=false
+  else
+    export NPM_CONFIG_PRODUCTION=${NPM_CONFIG_PRODUCTION:-true}
+  fi
   export NODE_MODULES_CACHE=${NODE_MODULES_CACHE:-true}
 }
 
@@ -190,6 +194,11 @@ function build_dependencies() {
       npm install --unsafe-perm --quiet --userconfig $build_dir/.npmrc 2>&1 | indent
     fi
   fi
+}
+
+function run_custom_build_script() {
+  info "npm run $CUSTOM_BUILD_SCRIPT"
+  npm run $CUSTOM_BUILD_SCRIPT --userconfig $build_dir/.npmrc 2>&1 | indent
 }
 
 ensure_procfile() {
