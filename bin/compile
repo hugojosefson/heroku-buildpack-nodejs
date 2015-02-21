@@ -18,9 +18,6 @@ mkdir -p $heroku_dir/node
 warnings=$(mktemp)
 home_cache_dir=$HOME/.cache
 
-ls -lF $cache_dir/node/
-exit 1
-
 # Load dependencies
 source $bp_dir/lib/common.sh
 source $bp_dir/lib/build.sh
