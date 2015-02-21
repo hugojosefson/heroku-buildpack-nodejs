@@ -16,7 +16,8 @@ bp_dir=$(cd $(dirname $0); cd ..; pwd)
 heroku_dir=$build_dir/.heroku
 mkdir -p $heroku_dir/node
 warnings=$(mktemp)
-home_cache_dir=$HOME/.cache/bower
+home_cache_dir=$HOME/.cache
+mkdir -p $home_cache_dir
 
 # Load dependencies
 source $bp_dir/lib/common.sh
